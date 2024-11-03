@@ -1,0 +1,30 @@
+
+NAME = ScavTrap
+
+SRC = ClapTrap.cpp ScavTrap.cpp main.cpp
+OBJ = $(SRC:.cpp=.o)
+
+CMP  = c++
+
+CFLAGS = -Wall -Wextra -Werror -std=c++98 
+
+
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(CMP) $(CFLAGS) $(OBJ) -o $(NAME)
+	@rm -rf *.o
+
+%.o:%.cpp
+	@$(CMP) $(CFLAGS) -o $@ -c $<
+
+clean:
+	@rm -rf $(OBJ)
+
+fclean: clean 
+	@rm -rf $(NAME)
+
+re: fclean	all
+
+.SECONDARY: $(OBJ)
