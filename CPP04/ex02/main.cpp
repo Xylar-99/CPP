@@ -7,7 +7,6 @@
 
 int main()
 {
-
-    Dog ptr;
-    // ptr.makeSound();
+    
+   
 }

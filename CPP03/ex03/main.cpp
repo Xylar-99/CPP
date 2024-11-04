@@ -7,7 +7,9 @@
 int main()
 {
 
-    DiamondTrap aa("ABDELBASSAT");
+    ClapTrap *aa = new DiamondTrap("abdo");
 
-    aa.attack("AKAZA");
+    aa->attack("AKAZA");
+
+    delete aa;
 }

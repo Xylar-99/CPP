@@ -38,16 +38,16 @@ FragTrap& FragTrap::operator=(const FragTrap &obj)
 }
 
 
-// void FragTrap::attack(const std::string& target)
-// {
-//     if(this->energy < 0 || this->hit < 0)
-//     {
-//         std::cout << " FragTrap can’t do anythin" << std::endl;
-//         return ;
-//     }
-//     this->energy--;
-//     std::cout << "FragTrap " << name << " attacks " << target << std::endl;
-// }
+void FragTrap::attack(const std::string& target)
+{
+    if(this->energy < 0 || this->hit < 0)
+    {
+        std::cout << " FragTrap can’t do anythin" << std::endl;
+        return ;
+    }
+    this->energy--;
+    std::cout << "FragTrap " << name << " attacks " << target << std::endl;
+}
 
 
 void FragTrap::highFivesGuys()

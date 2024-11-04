@@ -20,7 +20,12 @@ Cat::Cat(const Cat &obj)
 Cat & Cat::operator=(const Cat &obj)
 {
     if(this != &obj)
+    {
+        
+        // this->ptr = new Brain(*obj.ptr);
+        this->ptr = obj.ptr;
         this->type = obj.type;
+    }
     std::cout << "Cat Copy assignment operator calle" << std::endl;
     return *this;
 }

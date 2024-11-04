@@ -5,7 +5,8 @@
 int main()
 {
 
-    ScavTrap  aa("aa");
 
+
+    ScavTrap  aa("aa");
     aa.attack("AKAZA");
 }

@@ -7,13 +7,24 @@
 
 int main()
 {
-    
-    const Animal *ptr[20] ;
+    // {
 
+    // Cat bb;
+    // Cat aa(bb);
 
-    for(int i = 0; i < 20; i++)
+    // std::cout << "the Type is " << aa.getType() << std::endl;
+    // }
     {
-        while(i < 10)
+
+
+    int N_of_Animals = 4;
+
+    const Animal *ptr[N_of_Animals] ;
+
+
+    for(int i = 0; i < N_of_Animals; i++)
+    {
+        while(i < (N_of_Animals/ 2))
         {
         ptr[i] = new Dog();
         std::cout << "---------" << std::endl;
@@ -23,12 +34,13 @@ int main()
         ptr[i] = new Cat();
     }
 
-    std::cout << "/////////////////////////////" << std::endl;
-    for(int i = 0 ; i < 20 ; i++)
+    std::cout << "////////////////////////////////////////////////////////////////////////////" << std::endl;
+    for(int i = 0 ; i < N_of_Animals ; i++)
     {
         delete ptr[i];
     }
    
+    }
 
    
 }
