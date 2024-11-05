@@ -7,6 +7,10 @@
 
 int main()
 {
-    
+    Animal *aa = new Cat();
+
+    aa->makeSound();
+
+    delete aa;
    
 }
