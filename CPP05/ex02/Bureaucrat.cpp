@@ -2,8 +2,44 @@
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(int Number_of_grade , std::string NameOfBureaucrat):name(NameOfBureaucrat) , grade(Number_of_grade)
+Bureaucrat::Bureaucrat(int Number_of_grade,
+	std::string NameOfBureaucrat) : name(NameOfBureaucrat),
+	grade(Number_of_grade)
 {
+	try
+	{
+		if (Number_of_grade < 1)
+			GradeTooHighException();
+		else if (Number_of_grade > 150)
+			GradeTooLowException();
+	}
+	catch (const std::exception &e)
+	{
+		grade = 150;
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+Bureaucrat::Bureaucrat() : name("AKAZA"), grade(150)
+{
+}
+
+Bureaucrat::Bureaucrat(const Bureaucrat &obj)
+{
+	*this = obj;
+}
+
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat &obj)
+{
+	this->name = obj.name;
+	grade = obj.grade;
+	return (*this);
+}
+
+std::ostream &operator<<(std::ostream &os, Bureaucrat &obj)
+{
+	os << obj.getName() << ", bureaucrat grade " << obj.getGrade();
+	return (os);
 }
 
 std::string Bureaucrat::getName()
@@ -11,57 +47,47 @@ std::string Bureaucrat::getName()
 	return (name);
 }
 
-void Bureaucrat::SetDecrement()
-{
-	try
-	{
-		if(grade == 150)
-            throw std::exception();
-        else
-            grade++;
-	}
-	catch (std::exception &e)
-	{
-        std::cout << this->GradeTooLowException() << std::endl;
-	}
-
-	
-}
-
-void Bureaucrat::SetIncrement()
-{
-    try
-	{
-		if(!grade)
-            throw std::exception();
-        else
-	        grade--;
-	}
-	catch (std::exception &e)
-	{
-        std::cout << this->GradeTooHighException() << std::endl;
-	}
-}
-
-int Bureaucrat::getGrade()
+unsigned int Bureaucrat::getGrade()
 {
 	return (grade);
 }
 
-const char *Bureaucrat::GradeTooLowException()
+void Bureaucrat::SetDecrement()
 {
-	static std::string str = "Grade is too low! It must be between 0 and 150.";
-	return (str.c_str());
+	try
+	{
+		if (grade == 150)
+			GradeTooLowException();
+		else
+			grade++;
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 }
 
-const char *Bureaucrat::GradeTooHighException()
+void Bureaucrat::SetIncrement()
 {
-	static std::string str = "Grade is too high! It must be between 0 and 150.";
-	return (str.c_str());
+	try
+	{
+		if (grade == 1)
+			GradeTooHighException();
+		else
+			grade--;
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 }
 
-std::ostream & operator<<(std::ostream &os , Bureaucrat &obj)
+void Bureaucrat::GradeTooLowException()
 {
-	os <<  obj.getName() << ", bureaucrat grade " << obj.getGrade();
-	return (os);
+	throw std::out_of_range("Grade is too low! It must be between 1 and 150.");
+}
+
+void Bureaucrat::GradeTooHighException()
+{
+	throw std::out_of_range("Grade is too hight! It must be between 1 and 150.");
 }

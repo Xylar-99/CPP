@@ -1,31 +1,31 @@
 
 NAME = Execption
 
-SRC = Bureaucrat.cpp main.cpp
+	SRC = AForm.cpp Bureaucrat.cpp main.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
 
+				OBJ = $(SRC
+						:.cpp =.o)
 
-OBJ = $(SRC:.cpp=.o)
+		CMP = c++
 
-CMP  = c++
+	CFLAGS = -Wall - Wextra - Werror - std = c++ 98 -
+		g3
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
+			all : $(NAME)
 
+						$(NAME)
+	: $(OBJ) $(CMP) $(CFLAGS) $(OBJ) -
+		o $(NAME)
 
+			%.o : %.cpp $(CMP) $(CFLAGS) -
+		o $ @-c $ <
 
-all: $(NAME)
+	clean : @rm -
+			rf $(OBJ)
 
-$(NAME): $(OBJ)
-	$(CMP) $(CFLAGS) $(OBJ) -o $(NAME) 
+				fclean : clean @rm -
+							rf $(NAME)
 
-%.o:%.cpp
-	$(CMP) $(CFLAGS) -o $@ -c $<
+								re : fclean all
 
-clean:
-	@rm -rf $(OBJ)
-
-fclean: clean 
-	@rm -rf $(NAME)
-
-re: fclean	all
-
-.SECONDARY: $(OBJ)
+										.SECONDARY : $(OBJ)
