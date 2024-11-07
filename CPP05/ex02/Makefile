@@ -1,8 +1,7 @@
 
 NAME = Execption
 
-SRC = Bureaucrat.cpp Form.cpp main.cpp
-
+SRC = Bureaucrat.cpp main.cpp
 
 
 OBJ = $(SRC:.cpp=.o)

@@ -10,20 +10,17 @@ class Bureaucrat
 {
   public:
 	Bureaucrat(int NumberOfGrade , std::string NameOfBureaucrat);
-	Bureaucrat();
-	Bureaucrat(const Bureaucrat &obj);
-	Bureaucrat &operator=(const Bureaucrat &obj);
 	std::string getName();
-	unsigned int getGrade();
+	int getGrade();
 	void SetIncrement();
 	void SetDecrement();
-	void GradeTooLowException();
-	void GradeTooHighException();
+	const char *GradeTooLowException();
+	const char *GradeTooHighException();
 	~Bureaucrat(){};
 
   private:
-	std::string name;
-	unsigned int grade;
+	const std::string name;
+	int grade;
 };
 
 

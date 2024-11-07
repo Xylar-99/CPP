@@ -4,60 +4,36 @@
 
 Bureaucrat::Bureaucrat(int Number_of_grade , std::string NameOfBureaucrat):name(NameOfBureaucrat) , grade(Number_of_grade)
 {
-}
-
-std::string Bureaucrat::getName()
-{
-	return (name);
-}
-
-void Bureaucrat::SetDecrement()
-{
 	try
 	{
-		if(grade == 150)
-            throw std::exception();
-        else
-            grade++;
+		if(Number_of_grade < 1)
+			GradeTooHighException();
+		else if(Number_of_grade > 150)
+			GradeTooLowException();
 	}
-	catch (std::exception &e)
+	catch(const std::exception& e)
 	{
-        std::cout << this->GradeTooLowException() << std::endl;
+		grade = 150;
+		std::cerr << e.what() << std::endl;
 	}
-
 	
 }
 
-void Bureaucrat::SetIncrement()
+Bureaucrat::Bureaucrat():name("AKAZA") , grade(150)
 {
-    try
-	{
-		if(!grade)
-            throw std::exception();
-        else
-	        grade--;
-	}
-	catch (std::exception &e)
-	{
-        std::cout << this->GradeTooHighException() << std::endl;
-	}
 }
 
-int Bureaucrat::getGrade()
+Bureaucrat::Bureaucrat(const Bureaucrat &obj)
 {
-	return (grade);
+	*this = obj;
 }
 
-const char *Bureaucrat::GradeTooLowException()
+Bureaucrat & Bureaucrat::operator=(const Bureaucrat &obj)
 {
-	static std::string str = "Grade is too low! It must be between 0 and 150.";
-	return (str.c_str());
-}
+	this->name = obj.name;
+	grade = obj.grade;
 
-const char *Bureaucrat::GradeTooHighException()
-{
-	static std::string str = "Grade is too high! It must be between 0 and 150.";
-	return (str.c_str());
+	return *this;
 }
 
 std::ostream & operator<<(std::ostream &os , Bureaucrat &obj)
@@ -65,3 +41,60 @@ std::ostream & operator<<(std::ostream &os , Bureaucrat &obj)
 	os <<  obj.getName() << ", bureaucrat grade " << obj.getGrade();
 	return (os);
 }
+
+
+std::string Bureaucrat::getName()
+{
+	return (name);
+}
+
+
+unsigned int Bureaucrat::getGrade()
+{
+	return (grade);
+}
+
+void Bureaucrat::SetDecrement()
+{
+	try
+	{
+
+		if(grade == 150)
+			GradeTooLowException();
+		else
+			grade++;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	
+
+	
+}
+
+void Bureaucrat::SetIncrement()
+{
+   try
+	{
+		if(grade == 1)
+			GradeTooHighException();
+		else
+			grade--;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+void Bureaucrat::GradeTooLowException()
+{
+    throw std::out_of_range("Grade is too low! It must be between 1 and 150.");
+}
+
+void Bureaucrat::GradeTooHighException()
+{
+    throw std::out_of_range("Grade is too hight! It must be between 1 and 150.");
+}
+
