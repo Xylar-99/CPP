@@ -92,12 +92,10 @@ void Bureaucrat::GradeTooHighException()
 	throw std::out_of_range("Grade is too hight! It must be between 1 and 150.");
 }
 
-
-void Bureaucrat::executeForm(AForm const  &form)
+void Bureaucrat::executeForm(AForm const &form)
 {
-
-	if(form.getSign())
-		std::cout << name << " executed "  << std::endl;
+	if (this->grade < form.getGrade() && this->grade < form.getExec())
+		std::cout << name << " executed " << form.getName() << std::endl;
 	else
-		std::cout << name << " not executed "  << std::endl;
+		std::cout << "Action could not be completed." << std::endl;
 }

@@ -7,7 +7,6 @@
 
 ScavTrap::ScavTrap() : ClapTrap()
 {
-
     this->hit = 100;
     this->energy = 50;
     this->damage = 20;

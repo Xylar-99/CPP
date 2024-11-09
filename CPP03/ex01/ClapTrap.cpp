@@ -5,6 +5,7 @@
 
 ClapTrap::ClapTrap():hit(10) , energy(10) , damage(0)
 {
+    a = 32;
     name = "guest";
     std::cout << "ClapTrap Default constructor called" << std::endl;
 };

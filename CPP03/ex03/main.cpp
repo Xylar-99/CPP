@@ -7,9 +7,20 @@
 int main()
 {
 
-    ClapTrap *aa = new DiamondTrap("abdo");
+{
+
+    DiamondTrap *aa = new DiamondTrap("abdo");
 
     aa->attack("AKAZA");
-
+    aa->whoAmI();
     delete aa;
+}
+// {
+
+//     ClapTrap *aa = new DiamondTrap("abdo");
+
+//     aa->attack("AKAZA");
+    
+//     delete aa;
+// }
 }

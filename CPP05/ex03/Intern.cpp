@@ -12,8 +12,11 @@ Intern & Intern::operator=(const Intern &obj){}
 
 Intern::~Intern(){}
 
+
+
 Form * Intern::makeForm(std::string name , std::string target)
 {
-    
-}
+    Form *obj  = new Form();
 
+    return obj;
+}

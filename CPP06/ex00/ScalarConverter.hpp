@@ -5,6 +5,8 @@
 #define SCALARCONVERTER_HPP
 
 
+#include <iostream>
+
 
 class ScalarConverter
 {
@@ -13,6 +15,7 @@ public:
 	ScalarConverter(const ScalarConverter &obj);
   	ScalarConverter & operator=(const ScalarConverter &obj);
   	~ScalarConverter();
+	static void convert(std::string str);
 private:
 
 };

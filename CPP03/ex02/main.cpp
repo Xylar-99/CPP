@@ -3,19 +3,19 @@
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 
+
+#include <iostream>
+
+
+
+ 
 int main()
 {
-    {
+    
+    ClapTrap *aa = new FragTrap("akaza");
 
-    FragTrap aa("aa");
-    aa.attack("AKAZA");
-    aa.highFivesGuys();
-    }
-    {
+    aa->attack("aa");
 
-        ClapTrap *aa = new FragTrap("aa");
-        aa->attack("AKAZA");
-        delete aa;
-    }
+    delete aa;
     
 }

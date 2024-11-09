@@ -19,8 +19,8 @@ public:
   void execute(Bureaucrat const & executor) const;
 
 private:
-unsigned int gradeSign;
-unsigned int gradeExec;
+unsigned int _gradeSign;
+unsigned int _gradeExec;
 std::string target;
 
 };

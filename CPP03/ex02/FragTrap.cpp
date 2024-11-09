@@ -60,3 +60,8 @@ FragTrap::~FragTrap()
 {
     std::cout << "FragTrap Destructor called" << std::endl;
 };
+
+void FragTrap::test()
+{
+    std::cout << "hello" << std::endl;
+}

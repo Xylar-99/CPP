@@ -18,11 +18,12 @@ public:
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
 protected:
-std::string name;
-int hit ;
-int energy ;
-int damage ;
-
+    std::string name;
+    int hit ;
+    int energy ;
+    int damage ;
+private:
+    int a;
 };
 
 

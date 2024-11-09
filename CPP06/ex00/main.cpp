@@ -5,8 +5,11 @@
 
 #include <iostream>
 
-int main()
+int main(int ac , char **av)
 {
-    char * str("abdo");
-    std::cout << static_cast<char>(str) << std::endl;
+    if(ac != 2)
+        return 1;
+    
+    ScalarConverter::convert(av[1]);
+
 }
