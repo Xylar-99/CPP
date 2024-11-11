@@ -25,7 +25,8 @@ public:
   	~Character();
 private:
 	std::string name;
-	AMateria **ptr;
+	AMateria *ptr[4];
+	int index;
 
 };
 

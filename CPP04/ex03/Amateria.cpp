@@ -13,7 +13,6 @@ AMateria::AMateria()
     type = "TEST";
 }
 
-
 AMateria::AMateria(const AMateria &obj)
 {
     *this = obj;
@@ -32,11 +31,7 @@ void AMateria::use(ICharacter& target)
 }
 
 
-
-
-
-
 std::string const & AMateria::getType() const
 {
-    return type;
+    return this->type;
 }

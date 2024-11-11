@@ -7,10 +7,14 @@
 
 int main()
 {
-    Animal *aa = new Cat();
+    // Animal aa;
+    // {
 
-    aa->makeSound();
+    // Animal *aa = new Cat();
 
-    delete aa;
+    // aa->makeSound();
+
+    // delete aa;
+    // }
    
 }

@@ -8,14 +8,13 @@
 
 Character::Character() : name("AKAZA")
 {
-    ptr  = new Ice[4];
-
+    index = 0;
 }
 
 Character::Character(std::string name)
 {
+    index = 0;
     this->name = name;
-    ptr  = new Cure[4];
 }
 
 
@@ -26,16 +25,12 @@ Character::Character(const Character &obj)
 
 Character & Character::operator=(const Character &obj)
 {
-
-
     this->name = obj.name;
-
     return *this;
 }
 
 Character::~Character()
 {
-    // delete ptr;
 }
 
 
@@ -47,20 +42,24 @@ std::string const & Character::getName() const
 void Character::equip(AMateria* m)
 {
 
-    // problem here 
-    (void)m;
-    *ptr[0] = new Ice();
+    ptr[index] = m;
+    if(m)
+        index++;
 }
 
 void Character::unequip(int idx)
 {
-    (void)idx;
+    ptr[idx] = NULL;
 }
 
 void Character::use(int idx, ICharacter& target)
 {
-
-    ptr[idx].use(target);
+    if(idx > index || !ptr[idx])
+    {
+        std::cout << "THIS SLOT NOT FOUND!" << std::endl;
+        return ;
+    }
+    ptr[idx]->use(target);
 }
 
 

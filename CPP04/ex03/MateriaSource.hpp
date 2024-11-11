@@ -18,7 +18,9 @@ public:
 	void learnMateria(AMateria*);
 	AMateria* createMateria(std::string const & type);
   	~MateriaSource();
-
+private:
+	AMateria *ptr[4];
+	int index;
 };
 
 #endif
