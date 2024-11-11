@@ -5,7 +5,6 @@
 #define ICE_HPP
 
 #include "Amateria.hpp"
-
 #include "Character.hpp"
 
 class Ice : public AMateria

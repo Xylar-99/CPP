@@ -20,7 +20,6 @@ public:
   	~MateriaSource();
 private:
 	AMateria *ptr[4];
-	int index;
-};
+	};
 
 #endif

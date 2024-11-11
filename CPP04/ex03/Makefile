@@ -1,7 +1,9 @@
 
 NAME = Polymorphism
 
-SRC = Amateria.cpp Character.cpp Cure.cpp Ice.cpp ICharacter.cpp IMateriaSource.cpp main.cpp MateriaSource.cpp
+SRC = Amateria.cpp Character.cpp Cure.cpp Ice.cpp ICharacter.cpp IMateriaSource.cpp linked.cpp main.cpp MateriaSource.cpp
+
+
 
 OBJ = $(SRC:.cpp=.o)
 

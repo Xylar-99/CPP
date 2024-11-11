@@ -12,8 +12,9 @@
 MateriaSource::MateriaSource()
 {
     for(int i = 0; i < 4;i++)
+    {
         ptr[i] = NULL;
-    index = 0;
+    }
 }
 
 
@@ -35,12 +36,16 @@ MateriaSource::~MateriaSource(){}
 void MateriaSource::learnMateria(AMateria *obj)
 {
 
-    for(int i = 0; i < 4;i++)
+    for(int i = 0; i < 4; i++)
     {
-        if(ptr[i] == NULL)
+        if(!ptr[i])
+        {
             ptr[i] = obj;
+            return ;
+        }
     }
 }
+
 AMateria* MateriaSource::createMateria(std::string const & type)
 {
     for(int i = 0; i < 4 ; i++ )

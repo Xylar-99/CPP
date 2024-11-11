@@ -10,6 +10,7 @@
 #include "Amateria.hpp"
 
 
+struct s_data;
 
 class Character : public ICharacter
 {
@@ -26,7 +27,7 @@ public:
 private:
 	std::string name;
 	AMateria *ptr[4];
-
+	s_data *head;
 };
 
 #endif
