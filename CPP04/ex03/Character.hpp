@@ -26,7 +26,6 @@ public:
 private:
 	std::string name;
 	AMateria *ptr[4];
-	int index;
 
 };
 
