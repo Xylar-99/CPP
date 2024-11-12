@@ -23,10 +23,8 @@ int	main(void)
 	ICharacter *bob = new Character("bob");
 	me->use(0, *bob);
 	me->use(1, *bob);
-	me->use(-1, *bob);
-	
 	delete bob;
 	delete me;
 	delete src;
-	return (1);
+	return (0);
 }

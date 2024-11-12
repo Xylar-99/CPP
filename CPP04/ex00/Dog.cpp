@@ -18,8 +18,7 @@ Dog::Dog(const Dog &obj)
 
 Dog & Dog::operator=(const Dog &obj)
 {
-    if(this != &obj)
-        this->type = obj.type;
+    this->type = obj.type;
     std::cout << "Dog Copy assignment operator calle" << std::endl;
     return *this;
 }

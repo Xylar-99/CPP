@@ -20,10 +20,8 @@ Animal::Animal(const Animal &obj)
 Animal & Animal::operator=(const Animal &obj)
 {
     if(this != &obj)
-    {
         this->type = obj.type;
-    }
-    std::cout << "Animal Copy assignment operator calle" << std::endl;
+    std::cout << "Animal Copy assignment operator called" << std::endl;
     return *this;
 }
 void Animal::makeSound() const

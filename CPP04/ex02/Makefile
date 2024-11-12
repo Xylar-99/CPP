@@ -1,13 +1,14 @@
 
 NAME = Polymorphism
 
-SRC = Animal.cpp Cat.cpp Dog.cpp  main.cpp Brain.cpp
+SRC = Animal.cpp Brain.cpp Cat.cpp Dog.cpp main.cpp WrongAnimal.cpp WrongCat.cpp
+
 
 OBJ = $(SRC:.cpp=.o)
 
 CMP  = c++
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address
 
 
 all: $(NAME)

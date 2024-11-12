@@ -4,10 +4,12 @@
 
 
 
-t_data	*ft_lstnew(void *content)
+t_data	*ft_lstnew(AMateria *content)
 {
-	t_data	*new_node;
 
+	t_data	*new_node;
+	if(!content)
+		return NULL;
 	new_node = new t_data; 
 	new_node->content = content;
 	new_node->next = NULL;

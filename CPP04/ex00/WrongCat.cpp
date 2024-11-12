@@ -18,8 +18,7 @@ WrongCat::WrongCat(const WrongCat &obj)
 
 WrongCat & WrongCat::operator=(const WrongCat &obj)
 {
-    if(this != &obj)
-        this->type = obj.type;
+    this->type = obj.type;
     std::cout << "WrongCat Copy assignment operator calle" << std::endl;
     return *this;
 }

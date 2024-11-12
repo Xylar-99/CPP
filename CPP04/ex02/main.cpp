@@ -1,20 +1,21 @@
 
 
-#include "Dog.hpp"
 #include "Cat.hpp"
+#include "Dog.hpp"
 #include "WrongCat.hpp"
 
-
-int main()
+int	main(void)
 {
-    // Animal aa;
-    // {
 
-    // Animal *aa = new Cat();
+	// {
+	// 	// Animal obj;
+	// }
 
-    // aa->makeSound();
-
-    // delete aa;
-    // }
-   
+	// {
+	// 	Animal *obj = new Dog();
+	// 	std::cout << obj->getType() << std::endl;
+	// 	delete obj;
+	// }
+	
+	return (0);
 }

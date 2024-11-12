@@ -18,8 +18,7 @@ Cat::Cat(const Cat &obj)
 
 Cat & Cat::operator=(const Cat &obj)
 {
-    if(this != &obj)
-        this->type = obj.type;
+    this->type = obj.type;
     std::cout << "Cat Copy assignment operator calle" << std::endl;
     return *this;
 }

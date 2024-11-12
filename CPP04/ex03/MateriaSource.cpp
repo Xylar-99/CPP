@@ -6,15 +6,12 @@
 #include "Ice.hpp"
 #include "Cure.hpp"
 
-#include <bits/stdc++.h>
 
 
 MateriaSource::MateriaSource()
 {
     for(int i = 0; i < 4;i++)
-    {
         ptr[i] = NULL;
-    }
 }
 
 
@@ -30,7 +27,11 @@ MateriaSource & MateriaSource::operator=(const MateriaSource &obj)
     return *this;
 }
 
-MateriaSource::~MateriaSource(){}
+MateriaSource::~MateriaSource()
+{
+    for(int i = 0; i < 4 ; i++ )
+        delete ptr[i];
+}
 
 
 void MateriaSource::learnMateria(AMateria *obj)

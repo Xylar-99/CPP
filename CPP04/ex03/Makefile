@@ -9,11 +9,10 @@ OBJ = $(SRC:.cpp=.o)
 
 CMP  = c++
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -std=c++98  # -fsanitize=address
 
 
 all: $(NAME)
-	@rm -rf *.o
 
 $(NAME): $(OBJ)
 	$(CMP) $(CFLAGS) $(OBJ) -o $(NAME)

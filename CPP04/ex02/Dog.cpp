@@ -7,7 +7,6 @@ Dog::Dog()
 {
     type = "Dog";
     ptr = new Brain();
-
     std::cout << "Dog Default constructor called" << std::endl;
 }
 
