@@ -1,7 +1,8 @@
 
 NAME = cast
 
-SRC = main.cpp ScalarConverter.cpp
+SRC = main.cpp Serializer.cpp
+
 
 OBJ = $(SRC:.cpp=.o)
 
