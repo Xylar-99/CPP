@@ -44,7 +44,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &obj)
 
 void ClapTrap::attack(const std::string& target)
 {
-     if(this->energy < 0 || this->hit < 0)
+    if(this->energy < 0 || this->hit < 0)
     {
         std::cout << " ClapTrap can’t do anythin" << std::endl;
         return ;
