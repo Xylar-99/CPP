@@ -6,6 +6,8 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "*.tcc": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "cstdint": "cpp",
+        "sstream": "cpp"
     }
 }
