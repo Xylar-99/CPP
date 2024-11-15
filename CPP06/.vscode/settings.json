@@ -9,6 +9,8 @@
         "limits": "cpp",
         "cstdint": "cpp",
         "sstream": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "cstdlib": "cpp",
+        "string": "cpp"
     }
 }

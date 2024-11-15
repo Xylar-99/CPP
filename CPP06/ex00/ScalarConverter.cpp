@@ -39,25 +39,21 @@ void PrintCasting(double &value)
 
 
 
-void forinff(std::string str , double &value)
+int forinff(std::string str )
 {
     int flag = 0;
     size_t index = (str.find("inf") == str.npos) ? ((str.find("nan") != str.npos && ++flag) ? str.find("nan"): str.size()): str.find("inf");
     size_t final = ((index == str.size() || str.size() < 4) ? str.npos : ((str[index + 3] == 'f') ? 4 : 3));
-
     str.erase(index , final);
     index = str.size();
+
     if((index == 1 && (str.find_first_of("-+") || flag) ) || index > 1)
-    {
-        value = 0;
-        return;
-    }
-    value  = (!flag) ? std::numeric_limits<double>::infinity() : std::numeric_limits<double>::quiet_NaN();
-    value *= ((!str[0] || str[0] == '+' ) ? 1 : -1 );
+        return 1;
+    return 0;
 }
 
 
-void Parse(std::string str , double &value)
+int Parse(std::string &str)
 {
 
     size_t flag  = (str[0] == '-' || str[0] == '+');
@@ -66,9 +62,7 @@ void Parse(std::string str , double &value)
     flag *= !(flag == str.npos || ((flag == str.rfind("f") && flag == str.size() - 1 )   && str.find(".") != str.npos ));
     flag += (str.find(".") != str.rfind(".") && str.find(".") != str.npos);
 
-    if(flag && str.size() != 1)
-        std::cout << "Errorr" << std::endl;
-    std::istringstream(str) >> value;
+    return ((flag && str.size() != 1) ? 1 : 0);
 }
 
 
@@ -77,9 +71,14 @@ void Parse(std::string str , double &value)
 void ScalarConverter::convert(std::string str)
 {
 
-    double value ;
-    forinff(str , value);
-    if(!value)
-        Parse(str  , value);
+    double value = 0 ;
+    std::stringstream ss;
+    ss << (int)str[0];
+    str = str.size() == 1 ? ss.str() : str;
+    if(!forinff(str) || !Parse(str))
+        value = std::atof(str.c_str());
+    else
+        std::cout << "Error" << std::endl;
+
     PrintCasting(value);
 }

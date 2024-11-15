@@ -20,4 +20,7 @@ private:
 
 };
 
+void Parse(std::string str , double &value);
+int forinff(std::string str );
+
 #endif
