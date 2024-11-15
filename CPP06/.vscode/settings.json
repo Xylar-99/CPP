@@ -8,6 +8,7 @@
         "*.tcc": "cpp",
         "limits": "cpp",
         "cstdint": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "string_view": "cpp"
     }
 }
