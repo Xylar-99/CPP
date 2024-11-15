@@ -43,11 +43,13 @@ void forinff(std::string str , double &value)
 {
     int flag = 0;
     size_t index = (str.find("inf") == str.npos) ? ((str.find("nan") != str.npos && ++flag) ? str.find("nan"): str.size()): str.find("inf");
-    size_t final = ((index == str.npos || str.size() <= 4) ? str.npos : ((str[index + 3] == 'f') ? 4 : 3));
+    size_t final = ((index == str.size() || str.size() <= 4) ? str.npos : ((str[index + 3] == 'f') ? 4 : 3));
     str.erase(index , final);
-    index = str.size();
 
-    if(index > 1 || (flag && index ) || (index  && !str.find("+-")))
+    std::cout << index << "    "  <<str.find_first_of("-+") << "      " << str << std::endl;
+    index = str.size();
+    // str.find_first_of()
+    if((index == 1 && (str.find_first_of("-+") || flag) ) || index > 1)
     {
     value = 0;
     return;
@@ -81,12 +83,10 @@ void ScalarConverter::convert(std::string str)
     // std::cout << aa << std::endl;
     double value ;
     forinff(str , value);
-    if(!value)
-    {    
-    Parse(str  , value);
-    }
     std::cout << value << std::endl;
-    PrintCasting(value);
+    // if(!value)
+    //     Parse(str  , value);
+    // PrintCasting(value);
     // std::cout <<  << std::endl;
 
     // std::cout << value << std::endl;
