@@ -57,28 +57,36 @@ double forinff(std::string str)
 void Parse(std::string str , double &value)
 {
 
-    (void)value;
-    int flag = (str[0] == '-' || str[0] == '+') ;
+    // = (str[0] == '-' || str[0] == '+');
 
-    try
-    {
-        if(str.find_first_not_of("0123456789" ,  flag) != str.npos)
-            throw std::out_of_range("NOT NUMBER");
+    size_t flag  = 0;
+    flag = str.find_first_not_of("0123456789." , flag);
+    flag = !flag ? 1 : flag ;
+    flag *= !(flag == str.npos || ((flag == str.rfind("f") && flag == str.size() - 1 )  && str.find(".") != str.npos));
+    flag += (str.find(".") != str.rfind(".") && str.find(".") != str.npos);
+
+
+
+    if(flag)
+        std::cout << "Errorr" << std::endl;
+    else
         std::cout <<  str <<  std::endl;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+    return ;
     std::istringstream(str) >> value;
 }
 
 
 void ScalarConverter::convert(std::string str)
 {
+    // float aa = 323f;
 
-    double value = forinff(str);
-    if(!value)
-        Parse(str  , value);
-    PrintCasting(value);
+    // std::cout << aa << std::endl;
+    double value ;
+    Parse(str  , value);
+
+    // std::cout << value << std::endl;
+    // double value = forinff(str);
+    // if(!value)
+        // Parse(str  , value);
+    // PrintCasting(value);
 }
