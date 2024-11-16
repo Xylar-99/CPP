@@ -7,8 +7,9 @@
 #include <string>
 #include <cstring>
 #include <cmath>
-
+#include <limits>
 ScalarConverter::ScalarConverter(){}
+
 
 ScalarConverter::ScalarConverter(const ScalarConverter &obj)
 {
@@ -26,20 +27,56 @@ ScalarConverter & ScalarConverter::operator=(const ScalarConverter &obj)
 ScalarConverter::~ScalarConverter(){}
 
 
+std::string PrintfString(std::string str)
+{
+   return str;
+}
 
-void PrintCasting(double &value)
+
+void printaa(double value , int vprint , int flag)
 {
 
-    std::cout <<  "char   : " << static_cast<char>(value) << std::endl;
-    std::cout << "int    : " << static_cast<int>(value) << std::endl;
-    std::cout << "float  : " << static_cast<float >(value) << "f" << std::endl;
-    std::cout << "double : " << static_cast<double >(value) << std::endl;
+
+     if(std::isnan(value) || (!flag && std::isinf(value)))
+     {
+        std::cout << "IMPOSSIBLE" << std::endl;
+        return ;
+     }
+
+
+    if(flag)
+        std::cout << ((std::isinf(value) && value > 0)? std::numeric_limits<int>::max() : vprint) << std::endl; 
+    else
+        std::cout << (value >= 32 && value <= 126 ? std::string(1 , (char)vprint) : std::string("Non displayable")) << std::endl;
 
 }
 
 
+void PrintCasting(double &value , std::string str)
+{
+    int frac = 1;
+    if(str.find(".") != str.npos && str[str.find(".") + 1])
+        frac = str.size() - (str.find(".") + 1) + (str[str.size() - 1] == 'f') * (-1);
 
-int forinff(std::string str )
+    frac = (!frac) ? 1 : frac;
+
+    char ch = static_cast<char>(value);
+    int integer = static_cast<int>(value);
+    float flot = static_cast<float>(value);
+    double dauble = static_cast<double>(value);
+
+    std::cout <<  "char   : ";
+    printaa(value , ch , 0);
+    std::cout << "int    : "; 
+    printaa(value , integer , 1);
+    std::cout << std::fixed << std::setprecision(frac);
+    std::cout << "float  : " << flot << "f" << std::endl;
+    std::cout << "double : " << dauble   << std::endl;
+
+}
+
+
+int Infinity(std::string str )
 {
     int flag = 0;
     size_t index = (str.find("inf") == str.npos) ? ((str.find("nan") != str.npos && ++flag) ? str.find("nan"): str.size()): str.find("inf");
@@ -62,7 +99,7 @@ int Parse(std::string &str)
     flag *= !(flag == str.npos || ((flag == str.rfind("f") && flag == str.size() - 1 )   && str.find(".") != str.npos ));
     flag += (str.find(".") != str.rfind(".") && str.find(".") != str.npos);
 
-    return ((flag && str.size() != 1) ? 1 : 0);
+    return ((flag && str.size() != 1));
 }
 
 
@@ -70,15 +107,17 @@ int Parse(std::string &str)
 
 void ScalarConverter::convert(std::string str)
 {
-
     double value = 0 ;
     std::stringstream ss;
     ss << (int)str[0];
     str = str.size() == 1 ? ss.str() : str;
-    if(!forinff(str) || !Parse(str))
+    if(!Infinity(str) || !Parse(str))
         value = std::atof(str.c_str());
     else
+    {
         std::cout << "Error" << std::endl;
+        return ;
+    }
 
-    PrintCasting(value);
+    PrintCasting(value , str);
 }

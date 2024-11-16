@@ -21,6 +21,6 @@ private:
 };
 
 void Parse(std::string str , double &value);
-int forinff(std::string str );
+int Infinity(std::string str );
 
 #endif

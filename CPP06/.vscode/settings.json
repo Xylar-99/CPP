@@ -11,6 +11,8 @@
         "sstream": "cpp",
         "string_view": "cpp",
         "cstdlib": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "iomanip": "cpp",
+        "cmath": "cpp"
     }
 }
