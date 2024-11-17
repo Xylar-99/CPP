@@ -1,7 +1,8 @@
 
 NAME = Serialization
 
-SRC = main.cpp Serializer.cpp
+SRC = A.cpp Base.cpp B.cpp C.cpp Function.cpp main.cpp
+
 
 
 

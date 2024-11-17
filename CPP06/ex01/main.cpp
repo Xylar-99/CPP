@@ -1,21 +1,21 @@
 
 
-#include "Serializer.hpp"
 
-
-
+// #include <cstdint>
 #include <iostream>
+#include "Serializer.hpp"
 
 
 
 int main()
 {
-    Data pp;
-   
-   
-   Data* ptr = &pp;
-    uintptr_t intPtr = reinterpret_cast<uintptr_t>(ptr);
+    int a = 32;
+    int *ptr = &a;
 
+    uintptr_t raw = Serializer::serialize(ptr);
+    int *b = Serializer::deserialize(raw);
 
-    std::cout << intPtr << std::endl;
+    std::cout << ptr << "        " << b << std::endl;
+    std::cout << *ptr << "        " << *b << std::endl;
+
 }

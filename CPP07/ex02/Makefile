@@ -1,7 +1,7 @@
 
-NAME = Serialization
+NAME = array	
 
-SRC = main.cpp Serializer.cpp
+SRC = main.cpp 
 
 
 
