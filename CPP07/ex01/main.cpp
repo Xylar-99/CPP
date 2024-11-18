@@ -9,6 +9,14 @@ T funcptr(T &p1)
     return ++p1;
 }
 
+
+template <class T>
+void Iter(T add[] , unsigned int size , T (*funcptr)(T &))
+{
+    for(unsigned int  i = 0; i < size  ; i++)
+        funcptr(add[i]);
+}
+
 int main()
 {
     {
