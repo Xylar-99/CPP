@@ -9,13 +9,13 @@
 
 int main()
 {
-    int a = 32;
-    int *ptr = &a;
-
+    data a ;
+    a.value = 32;
+    data *ptr = &a;
     uintptr_t raw = Serializer::serialize(ptr);
-    int *b = Serializer::deserialize(raw);
+    data *b = Serializer::deserialize(raw);
 
     std::cout << ptr << "        " << b << std::endl;
-    std::cout << *ptr << "        " << *b << std::endl;
+    std::cout << ptr->value << "        " << b->value << std::endl;
 
 }

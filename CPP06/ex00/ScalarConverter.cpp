@@ -103,21 +103,16 @@ int Parse(std::string &str)
 }
 
 
-
-
 void ScalarConverter::convert(std::string str)
 {
     double value = 0 ;
     std::stringstream ss;
     ss << (int)str[0];
-    str = str.size() == 1 ? ss.str() : str;
+    str = (str.size() == 1 && isalpha(str[0]) ) ?  ss.str() : str;
     if(!Infinity(str) || !Parse(str))
         value = std::atof(str.c_str());
     else
-    {
-        std::cout << "Error" << std::endl;
         return ;
-    }
 
     PrintCasting(value , str);
 }

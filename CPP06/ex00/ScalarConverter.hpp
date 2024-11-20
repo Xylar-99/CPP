@@ -15,12 +15,11 @@ public:
 	ScalarConverter(const ScalarConverter &obj);
   	ScalarConverter & operator=(const ScalarConverter &obj);
   	~ScalarConverter();
+
+public:
 	static void convert(std::string str);
-private:
 
 };
 
-void Parse(std::string str , double &value);
-int Infinity(std::string str );
 
 #endif

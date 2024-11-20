@@ -6,25 +6,25 @@
 
 #include <stdint.h>
 
-// struct Data
-// {
-//   int value;
-// };
+struct data
+{
+  int value;
+};
 
 
 
 class Serializer
 {
 
-public: 
+private: 
     Serializer();
     Serializer(const Serializer &obj);
     Serializer & operator=(const Serializer &obj);
     ~Serializer();
 
 public:
-  static uintptr_t serialize(int* ptr);
-  static int* deserialize(uintptr_t raw);
+  static uintptr_t serialize(data* ptr);
+  static data* deserialize(uintptr_t raw);
 
 };
 
