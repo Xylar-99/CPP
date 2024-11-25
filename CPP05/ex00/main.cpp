@@ -8,21 +8,17 @@
 
 int main() 
 {
+    
+
+    try
     {
-
-    Bureaucrat obj(-1 , "MUZAN-SAMA");
-    std::cout << obj << std::endl;
-    obj.SetDecrement(); 
-    std::cout << obj << std::endl;
-
+        /* code */
     }
-    std::cout << "----------------------------------------------------------" << std::endl;
+    catch(const std::exception& e)
     {
-
-    Bureaucrat obj(150 , "MUZAN-SAMA");
-    std::cout << obj << std::endl;
-    obj.SetIncrement();
-    std::cout << obj << std::endl;
+        std::cerr << e.what() << '\n';
     }
+    
+
     return 0;
 }

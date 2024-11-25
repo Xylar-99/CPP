@@ -4,43 +4,25 @@
 #ifndef MUTANTSTACK_HPP
 #define MUTANTSTACK_HPP
 
+#include <iostream>
 #include <stack>
+#include <algorithm>
 
 template<class T>
-class MutantStack
+class MutantStack : public std::stack<T>
 {
-private:
-    std::stack<T> ss;
+public:
+    MutantStack();
+    MutantStack(const MutantStack &obj);
+    MutantStack & operator=(const MutantStack &obj);
+    ~MutantStack();
     
-public: 
-    MutantStack()
-    {
-        
-    }
-    // MutantStack(const MutantStack &obj);
-    // MutantStack & operator=(const MutantStack &obj);
-    // ~MutantStack();
-
-
-public: // member function stack
-    void push(int n)
-    {
-        ss.push(n);
-    }
-    void pop()
-    {
-        ss.pop();
-    }
-    int size()
-    {
-        return ss.size();
-    }
-    T top()
-    {
-        return (ss.top());
-    }
-    
-
+public:
+    typedef typename std::deque<T>::iterator iterator;
+    iterator end();
+    iterator begin();
 };
+
+#include "MutantStack.tpp"
 
 #endif

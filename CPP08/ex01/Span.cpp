@@ -16,7 +16,8 @@ Span::Span(int n)
     index = 0;
     if(n < 0)
         throw std::out_of_range("NOT VALIDE");
-    data.reserve(n);
+    data.assign(n , 0);
+    
 }
 
 
@@ -41,8 +42,8 @@ Span::~Span()
 void Span::addNumber(int value)
 {
     if(index >= size)
-        return ;
-    data.push_back(value);
+        throw(std::out_of_range("out of range"));
+    data[index] = value;
     index++;
 }
 
@@ -54,20 +55,24 @@ void Span::PrintVector()
 
 int Span::shortestSpan()
 {
+    if(data.size() <= 1)
+        throw(std::logic_error("Error"));
+    
     std::vector<int> arr;
     std::sort(data.begin() , data.end());
 
     for(int i = 1; (unsigned long)i < data.size() ;i++)
         arr.push_back((data[i] - data[i - 1]));
 
-    
-    std::sort(arr.begin() , arr.end());
-    return arr[0];
+    sort(arr.begin() , arr.end());
+    return (arr[0]);
 }
 
 
 int Span::longestSpan()
 {
+    if(data.size() <= 1)
+        throw(std::logic_error("Error"));
     std::sort(data.begin() , data.end());
     return (data.back() - data.front());
 }

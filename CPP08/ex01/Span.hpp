@@ -6,7 +6,7 @@
 
 #include <iostream>
 #include <vector>
-
+#include <bits/stdc++.h>
 class Span
 {
 private:

@@ -1,7 +1,9 @@
 
 NAME = template	
 
-SRC = main.cpp 
+SRC = main.cpp
+
+
 
 
 OBJ = $(SRC:.cpp=.o)
