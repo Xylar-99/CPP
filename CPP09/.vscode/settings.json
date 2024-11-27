@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "algorithm": "cpp",
+        "iostream": "cpp",
+        "new": "cpp",
+        "*.tcc": "cpp",
+        "ostream": "cpp",
+        "*.tpp": "cpp",
+        "iterator": "cpp",
+        "fstream": "cpp",
+        "stdexcept": "cpp",
+        "iosfwd": "cpp",
+        "limits": "cpp",
+        "cstdlib": "cpp",
+        "ctime": "cpp"
+    }
+}
