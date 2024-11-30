@@ -18,7 +18,8 @@ int main(int ac , char **av)
     try
     {
         BitcoinExchange obj(av[1]);
-        obj.parse();
+        obj._storToMap();
+        // obj.parse();
     }
     catch(const std::exception& e)
     {

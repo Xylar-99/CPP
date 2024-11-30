@@ -28,8 +28,7 @@ class   BitcoinExchange
 {
 private:
     std::ifstream _file;
-    std::map<std::string, std::string> data;
-    t_data _dataParse;
+    std::map<time_t, float > data;
 
 public: 
     BitcoinExchange();
@@ -39,14 +38,14 @@ public:
 
 public:
     BitcoinExchange(char *str);
+    void _storToMap();
     void parse();
-    int ft_count(std::string &line);
-    void _CheckLIne(std::string line);
-
+    void _CheckLIne(std::string line , time_t &key , float &value , int flag);
+    int findvalue();
 };
 
-void ParseKey(std::string key);
-void ParseVAlue(std::string number);
+time_t ParseKey(std::string key);
+float ParseVAlue(std::string number , int flag);    
 
 
 
