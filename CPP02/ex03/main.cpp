@@ -28,7 +28,7 @@ int main( void )
 Point A(0,0);
 Point B(5,0);
 Point C(0,5);
-Point P(-1,-1);
+Point P(4,4);
 
 std::cout << bsp(A , B , C , P) << std::endl;
 
