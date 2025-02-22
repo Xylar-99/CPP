@@ -20,68 +20,59 @@ RPN & RPN::operator=(const RPN &obj)
 RPN::~RPN(){}
 
 
-void checkString(std::string &node)
+RPN::RPN(const char *s) : _str(s) {}
+
+
+void RPN::throwError(bool expr, const char *err)
 {
-
-    std::string op("+-/*");
-    size_t _find = node.find_first_not_of("0123456789");
-    size_t _rfind = node.find_last_not_of("0123456789");
-
-    if(_find != node.npos && (op.find(node[_find]) == op.npos || _find != _rfind))
-        throw(std::runtime_error("Error"));
-
+    std::string err_msg = "RPN : ";
+    err_msg += std::string(err);
+    if(expr) throw(std::runtime_error(err_msg));
 }
 
 
-void RPN::calculate(std::string &str)
+int RPN::Calculator(std::string &c)
 {
-    int save ;
-    int flag ;
+    std::cout << _data.size() << std::endl;
+    throwError(_data.size() != 2 , " 2 Invalid input. Please enter a valid number or operator.");
 
-    if(data.size() < 2)
-        throw(std::runtime_error("Error"));
-    save = data.top();
-    data.pop();
-
-    flag = !str.compare("+") + !str.compare("-") * 2; 
-    flag += !str.compare("*") * 3 + !str.compare("/") * 4;
-
-    switch (flag)
+    int va2 = _data.top();
+    _data.pop();
+    int va1 = _data.top();
+    _data.pop();
+    switch (c[0])
     {
-    case 1:
-        save += data.top() ;
+    case '+':
+        return(va2  + va1);
+    case '-':
+        return(va2  - va1);
+    case '*':
+        return(va2  * va1);
+    case '/':
+        return(va2  / va1);
+    default:
         break;
-    case 2:
-        save = data.top() - save;
-        break;
-    case 3:
-        save *= data.top();
-        break;
-    case 4:
-        save = data.top() / save;
     }
-    data.pop();
-    data.push(save);
+    return 1;
 }
 
-
-
-void RPN::_RPN(std::string str)
+void RPN::CheckString()
 {
-    std::stringstream s(str);
-    std::string ss;
-    while(s >> ss)
+    int psh;
+    throwError(_str.find_first_not_of("0123456789*/-+ ") != _str.npos , "Invalid input. Please enter a valid number or operator.");
+    std::stringstream ss(_str);
+    std::string word;
+    while (ss >> word) 
     {
-        checkString(ss);
-    
-        if(ss.find_first_not_of("+*-/") == ss.npos)
-            calculate(ss);
+        throwError(word.size() != 1 , "1 Invalid input. Please enter a valid number or operator.");
+
+        if(word.find("+/-*") != word.npos)
+            psh = Calculator(word);
         else
-            data.push(atoi(ss.c_str()));
+            psh = atoi(word.c_str());
+        _data.push(psh);
     }
-    
-    if(data.size() != 1)
-        throw(std::runtime_error("Error"));
-    std::cout << data.top() << std::endl;
-    data.pop();
+    std::cout << _data.size() << std::endl;
+    throwError(_data.size() != 1 , "3 Invalid input. Please enter a valid number or operator.");
+    std::cout << _data.top() << std::endl;
 }

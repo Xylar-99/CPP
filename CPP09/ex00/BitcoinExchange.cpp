@@ -1,8 +1,6 @@
-
-
 #include "BitcoinExchange.hpp"
-
 #include <ctime>
+
 
 BitcoinExchange::BitcoinExchange(){}
 
@@ -17,137 +15,131 @@ BitcoinExchange & BitcoinExchange::operator=(const BitcoinExchange &obj)
     return *this;
 }
 
-BitcoinExchange::~BitcoinExchange()
+BitcoinExchange::~BitcoinExchange(){}
+
+void BitcoinExchange::Throw_exeption(bool ex , const char *err)
 {
-    data.clear();
+    std::string msg_err = "btc : ";
+    msg_err += std::string(err);
+    if(ex)
+        throw(std::runtime_error(msg_err));
+}
+
+void BitcoinExchange::bitcOpenFile(const char *f)
+{
+    _database.open("database.csv");
+    Throw_exeption(_database.fail() , "database is not open ");
+
+    _input.open(f);
+    Throw_exeption(_input.fail() , "input is not open ");
 }
 
 
-
-BitcoinExchange::BitcoinExchange(char *FileName)
+int strtrim(std::string &str)
 {
+    size_t fpos = str.find_first_not_of(" ");
+    size_t lpos = str.find_last_not_of(" ");
+    if(fpos == str.npos )
+        fpos = 0;
 
-//  check  write in file or not
-    _file.open(FileName);
-    if(!_file)
-        throw(std::runtime_error("Error : " + std::string(strerror(errno))));
+    str = str.substr(fpos , lpos - fpos + 1);
+    return 1;
 }
 
 
-
-float ParseVAlue(std::string number , int flag)
+float BitcoinExchange::find(time_t date)
 {
-    size_t _find = number.find_first_not_of("0123456789 ");
-    size_t _rfind = number.find_last_not_of("0123456789 ");
+    std::map<time_t , float>::iterator it = _data.begin();
 
-    if(_find != number.npos && (_find != _rfind || number[_find] != '.')) throw(std::logic_error("Error: not a positive number."));
-
-    float value = std::atof(number.c_str());
-
-    if(((int)value < 0 || (int)value > 1000) && flag) throw(std::logic_error("Error: too large a number."));
-
-
-    return (value);
-}
-
-
-
-time_t ParseKey(std::string key)
-{
-    setenv("TZ", "UTC", 1);
-    tzset();
-    struct tm date ;
-
-    date.tm_hour = 15;
-    date.tm_min = 0;    
-    date.tm_sec = 0;
-
-    int flag = !strptime(key.c_str(), "%Y-%m-%d", &date) * 10;
-
-
-    time_t bitime = mktime(&date);
-    gmtime(&bitime);
-    flag += (bitime > time(0) || bitime < START) * 10;
-
-    std::string err = "Error: bad input => ";
-    if(flag)
-        throw(std::logic_error(err + key));
-    
-    return (bitime);
-}
-
-
-
-void BitcoinExchange::_CheckLIne(std::string line , time_t &key , float &value , int flag)
-{
-    size_t _find = line.find('|');
-
-    if(_find == line.npos || _find != line.rfind('|'))
-        throw(std::logic_error("Error : Not Find Pip"));
-    key = ParseKey(line.substr(0 , _find) );
-    value = ParseVAlue(line.substr(_find + 1 , line.length()) , flag);
-
-}
-
-
-
-int BitcoinExchange::findvalue()
-{
-    std::map<time_t , float >::iterator  it = data.begin();
-
-    while(it != data.end())
+    while(it != _data.end())
     {
-        std::cout <<  "key = " << it->first << "   value =  " << (it->second) << std::endl;
+        if(it->first > date)
+            break;
         it++;
     }
-
-    return 0;
+    Throw_exeption(it == _data.begin() && it->first != date , "date is not exist ");
+    return (--it)->second;
 }
 
 
-void BitcoinExchange::parse()
+void BitcoinExchange::CheckValue(std::string &value)
 {
-    std::string save;
-    time_t key;
-    float value;
+    float n;
 
-    while(std::getline(_file , save ))
-    {
-        try
-        {
-        _CheckLIne(save  , key , value , 1 );
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << e.what() << '\n';
-        }
-    }
+    size_t f = value.find_first_not_of("0123456789");
+    size_t l = value.find_last_not_of("0123456789");
+    Throw_exeption((f != l && f != value.npos) , "Error  value is not valid");
 
-    BitcoinExchange::findvalue();
+    n = std::strtof(value.c_str() , NULL);
+    Throw_exeption(n < 0 || n > 1000 , "Error is too large");
+
+    _value = n;
+}
+
+void BitcoinExchange::CheckDate(std::string &date)
+{
+    tm timeinfo;
+    memset(&timeinfo, 0, sizeof(std::tm));
+    Throw_exeption(!isdigit(date[date.size() - 1]) , "invalid1  DATE");
+    date.push_back('-');
+    Throw_exeption(!strptime(date.c_str(), "%Y-%m-%d-", &timeinfo) , "invalid  DATE");
+    _date = mktime(&timeinfo);
 
 }
 
-
-void BitcoinExchange::_storToMap()
+void BitcoinExchange::CheckLine(std::string &buff , std::string &date , std::string &value)
 {
-    std::string save;
-    time_t key;
-    float value;
-    std::ifstream fileCsv;
+    int pip;
 
-    fileCsv.open("input.csv");
+    pip = buff.find_first_of('|');
+    // Parsing date value 
+    {
+        date  = buff.substr(0 , pip); strtrim(date);
+        Throw_exeption(!date.size() , "Invalid date format.");
+        CheckDate(date);
+        date.erase(date.size() - 1 , 1);
+    }
 
-    while(std::getline(fileCsv , save ))
+    // Parsing numeric value 
+    {
+        value = buff.substr(pip + 1 , buff.size()); strtrim(value);
+        Throw_exeption(!value.size() , "Invalid value format.");
+        CheckValue(value);
+    }
+}
+
+
+void BitcoinExchange::database()
+{
+    std::string date  , value;
+    std::string buff;
+
+    while(std::getline(_database , buff ))
+    {
+        try 
+        {
+            CheckLine(buff , date , value); 
+            _data[_date] = _value;
+        }
+        catch(const std::exception& e) {}
+    };
+}
+
+void BitcoinExchange::bitcParsefile()
+{
+    database();
+    std::string date  , value;
+    std::string buff;
+    while(std::getline(_input , buff ))
     {
         try
         {
-        _CheckLIne(save  , key , value , 0 );
-        data[key] = value;
+            CheckLine(buff , date , value);
+            std::cout << date << " => " << value << " = " << _value * find(_date) << std::endl;
         }
-        catch(const std::exception& e)
+        catch(const std::exception& e) 
         {
+            std::cerr << e.what() << std::endl;
         }
-    }
-
-    this->findvalue();
+    };
 }

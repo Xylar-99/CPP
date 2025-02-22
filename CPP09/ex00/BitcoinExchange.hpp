@@ -1,34 +1,32 @@
-
-
-
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
 #include <iostream>
 #include <fstream>
-#include <map>
-#include <ctime>
-#include <sstream>
 #include <string>
+#include <ctime>
 #include <cstdlib>
-#include<bits/stdc++.h> 
-
-#define START 1230984000
-
-typedef struct s_data
-{
-    int dot;
-    int pip;
-    int tiri;
-    int index;
-}t_data;
-
+#include <cstring>
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <string>
+#include <stdexcept>
+#include <limits>
+#include <sstream>
+#include <locale>
+#include <map>
 
 class   BitcoinExchange
 {
+public:
+    std::map<time_t , float> _data;
+    std::ifstream _input;
+    std::ifstream _database;
+
 private:
-    std::ifstream _file;
-    std::map<time_t, float > data;
+    time_t _date;
+    float _value;
 
 public: 
     BitcoinExchange();
@@ -37,16 +35,18 @@ public:
     ~BitcoinExchange();
 
 public:
-    BitcoinExchange(char *str);
-    void _storToMap();
-    void parse();
-    void _CheckLIne(std::string line , time_t &key , float &value , int flag);
-    int findvalue();
+    void Throw_exeption(bool expr , const char *);
+    void CheckValue(std::string &value);
+    void CheckDate(std::string &date);
+    void CheckLine(std::string &buff , std::string &value , std::string &date);
+
+public:
+    void bitcOpenFile(const char *ff);
+    void bitcParsefile();
+    void database();
+    float find(time_t date);
+
 };
-
-time_t ParseKey(std::string key);
-float ParseVAlue(std::string number , int flag);    
-
 
 
 #endif

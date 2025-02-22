@@ -1,6 +1,3 @@
-
-
-
 #ifndef RPN_HPP
 #define RPN_HPP
 
@@ -8,13 +5,15 @@
 #include <string>
 #include <sstream> 
 #include <stack>
+#include <bits/stdc++.h>
 
 #include <stdlib.h>
 
 class RPN
 {
 private:
-	std::stack<int> data;
+	std::string _str;
+	std::stack<int> _data;
 
 public: 
 	RPN();
@@ -23,8 +22,11 @@ public:
 	~RPN();
 
 public:
-	void _RPN(std::string str);
-	void calculate(std::string &str);
+	RPN(const char *);
+	int Calculator(std::string &c);
+public:
+	void throwError(bool , const char *);
+	void CheckString();
 };
 
 #endif

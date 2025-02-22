@@ -6,16 +6,19 @@
 
 int main(int ac , char **av )
 {
-    if(ac != 2) return 1;
-
-    RPN obj;
     try
     {
-        obj._RPN(av[1]);
+        if(ac != 2)
+            throw(std::runtime_error("Error invalid args"));
+        RPN obj(av[1]);
+
+        obj.CheckString();
+
     }
     catch(const std::exception& e)
     {
-        std::cout << e.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
+    
     
 }
