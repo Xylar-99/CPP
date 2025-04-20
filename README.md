@@ -9,7 +9,7 @@
 
 ## 🏫 About 42 School
 
-[42](https://42.fr/en/homepage/) is a renowned, tuition-free programming school with a peer-to-peer learning model and project-based curriculum. It encourages learning through real-world challenges, teamwork, and creativity — no teachers, no classes, just code. 😎
+[42](https://profile-v3.intra.42.fr/) is a renowned, tuition-free programming school with a peer-to-peer learning model and project-based curriculum. It encourages learning through real-world challenges, teamwork, and creativity — no teachers, no classes, just code. 😎
 
 This repository contains my journey through the **C++ Piscine**, designed to level up C programming skills and transition into the world of **Object-Oriented Programming** with C++.
 
